@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #ebe2dbff;
+  font-family: "Raleway", sans-serif;
+  min-height: 100vh;
+}
+
+#root {
+  margin: auto;
+  text-align: center;
+  width: 80%;
+  margin-top: 3rem;
+}
