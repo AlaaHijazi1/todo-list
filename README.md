@@ -1,6 +1,5 @@
 # 📝 To-Do List App
 
-## 📌 Overview
 A simple and interactive **To-Do List App** built with **React** and **Vite**, allowing users to efficiently manage their tasks.
 
 ## 🚀 Features
