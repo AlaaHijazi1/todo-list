@@ -19,10 +19,15 @@ function TaskItem({ task, editingId, setEditingId, showDialog }) {
 
   const handleCheckCliked = (id) => {
     const updateTasks = tasks.map((task) => {
-      if (task.id == id) task.isCompleted = !task.isCompleted;
+      if (task.id == id) {
+        const wasIncomplete = !task.isCompleted;
+        task.isCompleted = !task.isCompleted;
+        if (wasIncomplete && task.isCompleted) {
+          showHideToast("Task completed successfully!");
+        }
+      }
       return task;
     });
-    showHideToast("Task completed successfully!");
     setTasks(updateTasks);
     window.localStorage.setItem("tasks", JSON.stringify(updateTasks));
   };
