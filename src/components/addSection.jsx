@@ -5,10 +5,12 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useContext, useEffect } from "react";
 import TaskProvider from "../context/tasksProvider";
+import ToastContext from "../context/toastContext";
 
 function AddSection() {
   const [taskName, setTaskName] = useState("");
   const { tasks, setTasks } = useContext(TaskProvider);
+  const { showHideToast } = useContext(ToastContext);
 
   const handleAddClick = (e) => {
     e.preventDefault();
@@ -20,6 +22,7 @@ function AddSection() {
     };
     const updatedTasks = [...tasks, Task];
     setTasks(updatedTasks);
+    showHideToast("New task added!");
     window.localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     setTaskName("");
   };

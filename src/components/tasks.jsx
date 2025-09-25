@@ -11,12 +11,15 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
+import ToastContext from "../context/toastContext";
+
 function Tasks() {
   const { tasks, setTasks, filter } = useContext(TaskProvider);
+  const { showHideToast } = useContext(ToastContext);
+
   const [editingId, setEditingId] = useState(null);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [dialogTaskID, setDialogTaskID] = useState(null);
-
   const filterdTasks = useMemo(() => {
     return tasks.filter((task) => {
       if (filter === "All") return true;
@@ -30,6 +33,7 @@ function Tasks() {
     setTasks(updateTasks);
     window.localStorage.setItem("tasks", JSON.stringify(updateTasks));
     setShowDeleteDialog(false);
+    showHideToast("Task Deleted Successfuly!");
   };
 
   const handleShowDeleteDialog = (id) => {

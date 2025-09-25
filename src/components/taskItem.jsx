@@ -7,21 +7,22 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import { useContext, useState } from "react";
 import TaskProvider from "../context/tasksProvider";
+import ToastContext from "../context/toastContext";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function TaskItem({ task, editingId, setEditingId, showDialog }) {
   const { tasks, setTasks } = useContext(TaskProvider);
-
   const isEdeting = task.id == editingId;
-
   const [editText, setEditText] = useState(task.text);
+  const { showHideToast } = useContext(ToastContext);
 
   const handleCheckCliked = (id) => {
     const updateTasks = tasks.map((task) => {
       if (task.id == id) task.isCompleted = !task.isCompleted;
       return task;
     });
+    showHideToast("Task completed successfully!");
     setTasks(updateTasks);
     window.localStorage.setItem("tasks", JSON.stringify(updateTasks));
   };
@@ -34,6 +35,7 @@ function TaskItem({ task, editingId, setEditingId, showDialog }) {
       return task;
     });
     setTasks(updateTasks);
+    showHideToast("Task updated successfully!");
     window.localStorage.setItem("tasks", JSON.stringify(updateTasks));
     setEditingId(null);
   };
