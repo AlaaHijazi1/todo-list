@@ -9,7 +9,6 @@ function Tasks() {
   const [editingId, setEditingId] = useState(null);
 
   const filterdTasks = useMemo(() => {
-    console.log("tt");
     return tasks.filter((task) => {
       if (filter === "All") return true;
       else if (filter === "Pending") return !task.isCompleted;
