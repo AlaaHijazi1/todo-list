@@ -1,18 +1,21 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import TaskItem from "./taskItem";
-import { useContext, useState } from "react";
+import { useContext, useState, useMemo } from "react";
 import TaskProvider from "../context/tasksProvider";
 
 function Tasks() {
   const { tasks, filter } = useContext(TaskProvider);
   const [editingId, setEditingId] = useState(null);
 
-  const filterdTasks = tasks.filter((task) => {
-    if (filter === "All") return true;
-    else if (filter === "Pending") return !task.isCompleted;
-    else return task.isCompleted;
-  });
+  const filterdTasks = useMemo(() => {
+    console.log("tt");
+    return tasks.filter((task) => {
+      if (filter === "All") return true;
+      else if (filter === "Pending") return !task.isCompleted;
+      else return task.isCompleted;
+    });
+  }, [tasks, filter]);
 
   return (
     <section className="tasksSection">
