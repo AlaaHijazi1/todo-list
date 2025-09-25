@@ -7,19 +7,11 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import { useContext, useState } from "react";
 import TaskProvider from "../context/tasksProvider";
-import Button from "@mui/material/Button";
-
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-function TaskItem({ task, editingId, setEditingId }) {
+function TaskItem({ task, editingId, setEditingId, showDialog }) {
   const { tasks, setTasks } = useContext(TaskProvider);
-  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   const isEdeting = task.id == editingId;
 
@@ -30,12 +22,6 @@ function TaskItem({ task, editingId, setEditingId }) {
       if (task.id == id) task.isCompleted = !task.isCompleted;
       return task;
     });
-    setTasks(updateTasks);
-    window.localStorage.setItem("tasks", JSON.stringify(updateTasks));
-  };
-
-  const handleDeleteConfirm = (id) => {
-    const updateTasks = tasks.filter((task) => task.id !== id);
     setTasks(updateTasks);
     window.localStorage.setItem("tasks", JSON.stringify(updateTasks));
   };
@@ -64,42 +50,6 @@ function TaskItem({ task, editingId, setEditingId }) {
 
   return (
     <>
-      <Dialog
-        open={showDeleteDialog}
-        onClose={() => {
-          setShowDeleteDialog(false);
-        }}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">Confirm Delete </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete this task?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            color="secondary"
-            variant="outlined"
-            onClick={() => {
-              setShowDeleteDialog(false);
-            }}
-          >
-            Cancel
-          </Button>
-          <Button
-            color="secondary"
-            variant="contained"
-            onClick={() => {
-              handleDeleteConfirm(task.id);
-            }}
-          >
-            Delete
-          </Button>
-        </DialogActions>
-      </Dialog>
-
       <Stack
         className="tasksSection__TaskItem"
         spacing={2}
@@ -160,7 +110,7 @@ function TaskItem({ task, editingId, setEditingId }) {
                 />
                 <DeleteOutlinedIcon
                   onClick={() => {
-                    setShowDeleteDialog(true);
+                    showDialog(task.id);
                   }}
                   sx={{
                     color: "#b71c1c",
