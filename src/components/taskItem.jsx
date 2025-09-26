@@ -5,17 +5,17 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
-import { useContext, useState } from "react";
-import {TaskContext} from "../context/tasksContext";
-import {ToastContext} from "../context/toastContext";
+import { useState } from "react";
+import { useTasks } from "../context/tasksContext";
+import { useToast } from "../context/toastContext";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function TaskItem({ task, editingId, setEditingId, showDialog }) {
-  const { tasks, setTasks } = useContext(TaskContext);
+  const { tasks, setTasks } = useTasks();
   const isEdeting = task.id == editingId;
   const [editText, setEditText] = useState(task.text);
-  const { showHideToast } = useContext(ToastContext);
+  const { showHideToast } = useToast();
 
   const handleCheckCliked = (id) => {
     const updateTasks = tasks.map((task) => {

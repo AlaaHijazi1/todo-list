@@ -2,11 +2,10 @@ import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { useContext } from "react";
-import {TaskContext} from "../context/tasksContext";
+import { useTasks } from "../context/tasksContext";
 
 function TaskFilter() {
-  const { filter, setFilter } = useContext(TaskContext);
+  const { filter, setFilter } = useTasks();
   return (
     <section className="FilterSection">
       <Stack className="FilterSection__filters" spacing={2} direction="row">

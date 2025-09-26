@@ -1,6 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 
-export const TaskContext = createContext({ tasks: [], setTasks: () => {} });
+const TaskContext = createContext({ tasks: [], setTasks: () => {} });
 
 function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([]);
@@ -12,5 +12,9 @@ function TaskProvider({ children }) {
     </TaskContext.Provider>
   );
 }
+
+export const useTasks = () => {
+  return useContext(TaskContext);
+};
 
 export default TaskProvider;

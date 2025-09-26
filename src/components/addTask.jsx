@@ -2,14 +2,14 @@ import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import Stack from "@mui/material/Stack";
 import { v4 as uuidv4 } from "uuid";
-import { useContext, useEffect, useState } from "react";
-import { TaskContext } from "../context/tasksContext";
-import { ToastContext } from "../context/toastContext";
+import { useEffect, useState } from "react";
+import { useTasks } from "../context/tasksContext";
+import { useToast } from "../context/toastContext";
 
 function AddTask() {
   const [taskName, setTaskName] = useState("");
-  const { tasks, setTasks } = useContext(TaskContext);
-  const { showHideToast } = useContext(ToastContext);
+  const { tasks, setTasks } = useTasks();
+  const { showHideToast } = useToast();
 
   const handleAddClick = (e) => {
     e.preventDefault();
