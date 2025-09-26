@@ -4,12 +4,12 @@ import Stack from "@mui/material/Stack";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useContext, useEffect } from "react";
-import TaskProvider from "../context/tasksProvider";
+import TaskContext from "../context/tasksContext";
 import ToastContext from "../context/toastContext";
 
-function AddSection() {
+function AddTask() {
   const [taskName, setTaskName] = useState("");
-  const { tasks, setTasks } = useContext(TaskProvider);
+  const { tasks, setTasks } = useContext(TaskContext);
   const { showHideToast } = useContext(ToastContext);
 
   const handleAddClick = (e) => {
@@ -70,4 +70,4 @@ function AddSection() {
   );
 }
 
-export default AddSection;
+export default AddTask;

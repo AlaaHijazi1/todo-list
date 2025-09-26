@@ -2,7 +2,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import TaskItem from "./taskItem";
 import { useContext, useState, useMemo } from "react";
-import TaskProvider from "../context/tasksProvider";
+import TaskContext from "../context/tasksContext";
 import Button from "@mui/material/Button";
 
 import Dialog from "@mui/material/Dialog";
@@ -14,7 +14,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import ToastContext from "../context/toastContext";
 
 function Tasks() {
-  const { tasks, setTasks, filter } = useContext(TaskProvider);
+  const { tasks, setTasks, filter } = useContext(TaskContext);
   const { showHideToast } = useContext(ToastContext);
 
   const [editingId, setEditingId] = useState(null);

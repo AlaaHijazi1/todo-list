@@ -6,13 +6,13 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import { useContext, useState } from "react";
-import TaskProvider from "../context/tasksProvider";
+import TaskContext from "../context/tasksContext";
 import ToastContext from "../context/toastContext";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function TaskItem({ task, editingId, setEditingId, showDialog }) {
-  const { tasks, setTasks } = useContext(TaskProvider);
+  const { tasks, setTasks } = useContext(TaskContext);
   const isEdeting = task.id == editingId;
   const [editText, setEditText] = useState(task.text);
   const { showHideToast } = useContext(ToastContext);

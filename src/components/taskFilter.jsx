@@ -3,10 +3,10 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useContext } from "react";
-import TaskProvider from "../context/tasksProvider";
+import TaskContext from "../context/tasksContext";
 
-function FilterSection() {
-  const { filter, setFilter } = useContext(TaskProvider);
+function TaskFilter() {
+  const { filter, setFilter } = useContext(TaskContext);
   return (
     <section className="FilterSection">
       <Stack className="FilterSection__filters" spacing={2} direction="row">
@@ -55,4 +55,4 @@ function FilterSection() {
   );
 }
 
-export default FilterSection;
+export default TaskFilter;

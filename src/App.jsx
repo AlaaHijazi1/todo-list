@@ -1,12 +1,12 @@
 import "./App.css";
-import AddSection from "./components/addSection";
-import FilterSection from "./components/filterSection";
+import AddTask from "./components/addTask";
+import TaskFilter from "./components/taskFilter";
 import Tasks from "./components/tasks";
 import Snackbars from "./components/snackBar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
-import TaskProvider from "./context/tasksProvider";
+import TaskProvider from "./context/tasksContext";
 import ToastContext from "./context/toastContext";
 import { useState } from "react";
 
@@ -43,8 +43,8 @@ function App() {
             <TaskProvider.Provider
               value={{ tasks, setTasks, filter, setFilter }}
             >
-              <AddSection />
-              <FilterSection />
+              <AddTask />
+              <TaskFilter />
               <Tasks />
               <Snackbars open={open} message={message} />
             </TaskProvider.Provider>
