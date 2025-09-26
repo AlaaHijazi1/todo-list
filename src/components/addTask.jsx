@@ -1,11 +1,10 @@
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import Stack from "@mui/material/Stack";
-import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useContext, useEffect } from "react";
-import TaskContext from "../context/tasksContext";
-import ToastContext from "../context/toastContext";
+import { useContext, useEffect, useState } from "react";
+import { TaskContext } from "../context/tasksContext";
+import { ToastContext } from "../context/toastContext";
 
 function AddTask() {
   const [taskName, setTaskName] = useState("");

@@ -2,7 +2,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import TaskItem from "./taskItem";
 import { useContext, useState, useMemo } from "react";
-import TaskContext from "../context/tasksContext";
+import {TaskContext} from "../context/tasksContext";
 import Button from "@mui/material/Button";
 
 import Dialog from "@mui/material/Dialog";
@@ -11,7 +11,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-import ToastContext from "../context/toastContext";
+import {ToastContext} from "../context/toastContext";
 
 function Tasks() {
   const { tasks, setTasks, filter } = useContext(TaskContext);

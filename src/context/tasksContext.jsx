@@ -1,5 +1,16 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
-const TaskContext = createContext({ tasks: [], setTasks: () => {} });
+export const TaskContext = createContext({ tasks: [], setTasks: () => {} });
 
-export default TaskContext;
+function TaskProvider({ children }) {
+  const [tasks, setTasks] = useState([]);
+  const [filter, setFilter] = useState("All");
+
+  return (
+    <TaskContext.Provider value={{ tasks, setTasks, filter, setFilter }}>
+      {children}
+    </TaskContext.Provider>
+  );
+}
+
+export default TaskProvider;

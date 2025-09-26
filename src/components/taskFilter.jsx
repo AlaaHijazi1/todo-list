@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useContext } from "react";
-import TaskContext from "../context/tasksContext";
+import {TaskContext} from "../context/tasksContext";
 
 function TaskFilter() {
   const { filter, setFilter } = useContext(TaskContext);

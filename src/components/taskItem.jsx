@@ -6,8 +6,8 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import { useContext, useState } from "react";
-import TaskContext from "../context/tasksContext";
-import ToastContext from "../context/toastContext";
+import {TaskContext} from "../context/tasksContext";
+import {ToastContext} from "../context/toastContext";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
