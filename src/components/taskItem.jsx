@@ -5,7 +5,7 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTasks } from "../context/tasksContext";
 import { useToast } from "../context/toastContext";
 
@@ -36,7 +36,7 @@ function TaskItem({ task, editingId, setEditingId, showDialog }) {
     const updateTasks = tasks.map((task) => {
       if (task.id == id) {
         editText.trim() === "" ? setEditText(task.text) : null;
-        return { ...task, text: editText ? editText : task.text };
+        return { ...task, text: editText.trim() ? editText.trim() : task.text };
       }
       return task;
     });
@@ -91,7 +91,7 @@ function TaskItem({ task, editingId, setEditingId, showDialog }) {
             <input
               type="text"
               disabled={!isEdeting}
-              value={editText}
+              value={editText.trim()}
               onChange={(e) => {
                 setEditText(e.target.value);
               }}
