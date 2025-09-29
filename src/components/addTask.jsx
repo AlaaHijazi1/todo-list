@@ -1,35 +1,24 @@
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import Stack from "@mui/material/Stack";
-import { v4 as uuidv4 } from "uuid";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useTasks } from "../context/tasksContext";
 import { useToast } from "../context/toastContext";
 
 function AddTask() {
   const [taskName, setTaskName] = useState("");
-  const { tasks, setTasks } = useTasks();
+  const { dispatch } = useTasks();
   const { showHideToast } = useToast();
 
   const handleAddClick = (e) => {
     e.preventDefault();
-    const Task = {
-      id: uuidv4(),
-      text: taskName,
-      date: new Date(),
-      isCompleted: false,
-    };
-    const updatedTasks = [...tasks, Task];
-    setTasks(updatedTasks);
+    dispatch({ type: "added", payload: { title: taskName } });
     showHideToast("New task added!");
-    window.localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     setTaskName("");
   };
 
   useEffect(() => {
-    const tasksFromStorage =
-      JSON.parse(window.localStorage.getItem("tasks")) || [];
-    setTasks(tasksFromStorage);
+    dispatch({ type: "get" });
   }, []);
 
   return (

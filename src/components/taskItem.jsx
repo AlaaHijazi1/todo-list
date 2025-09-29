@@ -12,38 +12,29 @@ import { useToast } from "../context/toastContext";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function TaskItem({ task, editingId, setEditingId, showDialog }) {
-  const { tasks, setTasks } = useTasks();
+  const { Tasks, dispatch } = useTasks();
   const isEdeting = task.id == editingId;
   const [editText, setEditText] = useState(task.text);
   const { showHideToast } = useToast();
 
   const handleCheckCliked = (id) => {
-    const updateTasks = tasks.map((task) => {
-      if (task.id == id) {
-        const wasIncomplete = !task.isCompleted;
-        task.isCompleted = !task.isCompleted;
-        if (wasIncomplete && task.isCompleted) {
-          showHideToast("Task completed successfully!");
-        }
-      }
-      return task;
-    });
-    setTasks(updateTasks);
-    window.localStorage.setItem("tasks", JSON.stringify(updateTasks));
+    const task = Tasks.find((t) => t.id === id);
+    dispatch({ type: "toggle", payload: { id } });
+    if (task && !task.isCompleted) {
+      showHideToast("Task completed successfully!");
+    }
   };
 
   const handleEditClick = (id) => {
-    const updateTasks = tasks.map((task) => {
-      if (task.id == id) {
-        editText.trim() === "" ? setEditText(task.text) : null;
-        return { ...task, text: editText.trim() ? editText.trim() : task.text };
-      }
-      return task;
+    if (task.id == id) {
+      editText.trim() === "" ? setEditText(task.text) : null;
+    }
+    dispatch({
+      type: "edit",
+      payload: { editText, id },
     });
-    setTasks(updateTasks);
-    showHideToast("Task updated successfully!");
-    window.localStorage.setItem("tasks", JSON.stringify(updateTasks));
     setEditingId(null);
+    showHideToast("Task updated successfully!");
   };
 
   const handelFormattedDate = (date) => {

@@ -14,24 +14,23 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useToast } from "../context/toastContext";
 
 function Tasks() {
-  const { tasks, setTasks, filter } = useTasks();
+  const { filter, Tasks, dispatch } = useTasks();
   const { showHideToast } = useToast();
 
   const [editingId, setEditingId] = useState(null);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [dialogTaskID, setDialogTaskID] = useState(null);
+
   const filterdTasks = useMemo(() => {
-    return tasks.filter((task) => {
+    return Tasks.filter((task) => {
       if (filter === "All") return true;
       else if (filter === "Pending") return !task.isCompleted;
       else return task.isCompleted;
     });
-  }, [tasks, filter]);
+  }, [Tasks, filter]);
 
   const handleDeleteConfirm = (id) => {
-    const updateTasks = tasks.filter((task) => task.id !== id);
-    setTasks(updateTasks);
-    window.localStorage.setItem("tasks", JSON.stringify(updateTasks));
+    dispatch({ type: "delete", payload: { id } });
     setShowDeleteDialog(false);
     showHideToast("Task Deleted Successfuly!");
   };
